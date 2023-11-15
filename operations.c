@@ -9,18 +9,18 @@
  */
 void f_pall(stack_t **head, unsigned int counter)
 {
-    stack_t *h;
-    (void)counter;
+	stack_t *h;
+	(void)counter;
 
-    h = *head;
-    if (h == NULL)
-        return;
+	h = *head;
+	if (h == NULL)
+		return;
 
-    while (h)
-    {
-        printf("%d\n", h->n);
-        h = h->next;
-    }
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+	}
 }
 
 /**
@@ -31,15 +31,15 @@ void f_pall(stack_t **head, unsigned int counter)
  */
 void f_pint(stack_t **head, unsigned int counter)
 {
-    if (*head == NULL)
-    {
-        fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
-        fclose(bus.file);
-        free(bus.content);
-        free_stack(*head);
-        exit(EXIT_FAILURE);
-    }
-    printf("%d\n", (*head)->n);
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*head)->n);
 }
 
 /**
@@ -50,36 +50,36 @@ void f_pint(stack_t **head, unsigned int counter)
  **/
 void f_push(stack_t **head, unsigned int counter)
 {
-    int j = 0, flag = 0;
+	int j = 0, flag = 0;
 
-    if (bus.arg)
-    {
-        if (bus.arg[0] == '-')
-            j++;
+	if (bus.arg)
+	{
+		if (bus.arg[0] == '-')
+			j++;
 
-        for (; bus.arg[j] != '\0'; j++)
-        {
-            if (bus.arg[j] > '9' || bus.arg[j] < '0')
-                flag = 1;
-        }
+		for (; bus.arg[j] != '\0'; j++)
+		{
+			if (bus.arg[j] > '9' || bus.arg[j] < '0')
+				flag = 1;
+		}
 
-        if (flag == 1)
-        {
-            fprintf(stderr, "L%d: usage: push integer\n", counter);
-            fclose(bus.file);
-            free(bus.content);
-            free_stack(*head);
-            exit(EXIT_FAILURE);
-        }
-    }
-    else
-    {
-        fprintf(stderr, "L%d: usage: push integer\n", counter);
-        fclose(bus.file);
-        free(bus.content);
-        free_stack(*head);
-        exit(EXIT_FAILURE);
-    }
+		if (flag == 1)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", counter);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
 }
 
 /**
@@ -90,20 +90,20 @@ void f_push(stack_t **head, unsigned int counter)
  */
 void f_pop(stack_t **head, unsigned int counter)
 {
-    stack_t *h;
+	stack_t *h;
 
-    if (*head == NULL)
-    {
-        fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
-        fclose(bus.file);
-        free(bus.content);
-        free_stack(*head);
-        exit(EXIT_FAILURE);
-    }
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
 
-    h = *head;
-    *head = h->next;
-    free(h);
+	h = *head;
+	*head = h->next;
+	free(h);
 }
 
 /**
@@ -115,26 +115,27 @@ void f_pop(stack_t **head, unsigned int counter)
  */
 void f_pchar(stack_t **head, unsigned int counter)
 {
-    stack_t *h;
-    h = *head;
+	stack_t *h;
 
-    if (!h)
-    {
-        fprintf(stderr, "L%d: can't pchar, stack empty\n", counter);
-        fclose(bus.file);
-        free(bus.content);
-        free_stack(*head);
-        exit(EXIT_FAILURE);
-    }
+	h = *head;
 
-    if (h->n > 127 || h->n < 0)
-    {
-        fprintf(stderr, "L%d: can't pchar, value out of range\n", counter);
-        fclose(bus.file);
-        free(bus.content);
-        free_stack(*head);
-        exit(EXIT_FAILURE);
-    }
+	if (!h)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
 
-    printf("%c\n", h->n);
+	if (h->n > 127 || h->n < 0)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%c\n", h->n);
 }
